@@ -15,11 +15,13 @@
  */
 class Solution {
     public boolean isSymmetric(TreeNode root) {
-        boolean ans = Mirror(root.left,root.right);
-        return ans;
+        if(root ==null)
+        {
+            return false;
+        }
+        return helper(root.left,root.right);
     }
-    public boolean Mirror(TreeNode t1 , TreeNode t2)
-    {
+    public boolean helper(TreeNode t1 , TreeNode t2){
         if(t1==null && t2==null)
         {
             return true;
@@ -28,6 +30,6 @@ class Solution {
         {
             return false;
         }
-        return t1.val==t2.val && Mirror(t1.left,t2.right) && Mirror(t1.right,t2.left);
+        return t1.val==t2.val && helper(t1.left ,t2.right) && helper(t1.right,t2.left);
     }
 }
