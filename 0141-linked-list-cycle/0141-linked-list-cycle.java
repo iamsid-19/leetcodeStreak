@@ -15,16 +15,15 @@ public class Solution {
         {
             return false;
         }
-        ListNode slow =head,fast=head;
-        while(fast!=null && fast.next!=null)
+        ListNode s=head,f=head;
+        while(f!=null && f.next!=null)
         {
-             slow=slow.next;
-            fast=fast.next.next;
-            if(slow==fast)
+            s=s.next;
+            f=f.next.next;
+            if(s==f)
             {
                 return true;
             }
-           
             
         }
         return false;
