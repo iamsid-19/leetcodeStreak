@@ -6,15 +6,6 @@ class Solution {
             pq.add(num);
             if(pq.size()>k) pq.poll();
         }
-        int max=Integer.MAX_VALUE;
-         for(int i=0;i<pq.size();i++)
-        {
-             int cur =pq.poll();
-             if(cur<max)
-             {
-                max=cur;
-             }
-        }
-        return max;
+       return pq.peek();
     }
 }
