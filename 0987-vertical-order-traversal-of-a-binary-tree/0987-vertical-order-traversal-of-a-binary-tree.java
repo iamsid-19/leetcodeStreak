@@ -13,53 +13,27 @@
  *     }
  * }
  */
-
-
 class Solution {
     public List<List<Integer>> verticalTraversal(TreeNode root) {
-        //column axis vs (row level vs priority queue)  
-        TreeMap<Integer, TreeMap<Integer, PriorityQueue<Integer>>> tm = new TreeMap<>();
-        helper(root, tm, 0, 0);
-
+        TreeNode<Integer,TreeNode<Integer,PriorityQueue<Integer> pq = new PriorityQueue<>()>>tm = new TreeNode<>();
         List<List<Integer>> ans = new ArrayList<>();
-
-        for (Integer xasis : tm.keySet()) {
-            List<Integer> row = new ArrayList<>();
-
-            TreeMap<Integer, PriorityQueue<Integer>> t = tm.get(xasis);
-            for (Integer level : t.keySet()) {
-                PriorityQueue<Integer> pq = t.get(level);
-                while (!pq.isEmpty()) {
-                    row.add(pq.poll());
-                }
-            }
-
-            ans.add(row);
-        }
-
-        return ans;
-
+        helper(root,tm, 0 ,0);
     }
-
-    public void helper(TreeNode root, TreeMap<Integer, TreeMap<Integer, PriorityQueue<Integer>>> tm, int level,
-            int verticalLevel) {
-        if (root == null)
-            return;
-        if (!tm.containsKey(verticalLevel)) {
-            tm.put(verticalLevel, new TreeMap<Integer, PriorityQueue<Integer>>());
-
+    public void helper( TreeNode root,  TreeNode<Integer,TreeNode<Integer,PriorityQueue<Integer> pq = new PriorityQueue<>()>>tm ,int row ,int col)
+    {
+        if(root==null) return;
+        if(!tm.containsKey(col))
+        {
+            tm.put(col, new TreeNode<Integer,PriorityQueue<Integer>);
         }
-
-        if (!tm.get(verticalLevel).containsKey(level)) {
+        if(!tm.get(col).containsKey(row))
+        {
             PriorityQueue<Integer> pq = new PriorityQueue<>();
-            tm.get(verticalLevel).put(level, pq);
+            tm.get(col).put(row,pq);
         }
-
-         PriorityQueue<Integer> pq = tm.get(verticalLevel).get(level);
-        pq.offer(root.val);
-
-        helper(root.left, tm, level + 1, verticalLevel - 1);
-        helper(root.right, tm, level + 1, verticalLevel + 1);
-
+        PriorityQueue<Integer> pq = tm.get(col).get(row);
+        pq.add(root.val);
+        
+        helper(root.left , tm , left-1, right +1);
     }
 }
