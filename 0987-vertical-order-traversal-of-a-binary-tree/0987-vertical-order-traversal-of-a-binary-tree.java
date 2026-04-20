@@ -15,9 +15,9 @@
  */
 class Solution {
     public List<List<Integer>> verticalTraversal(TreeNode root) {
-        TreeMap<Integer,TreeMap<Integer,PriorityQueue<Integer>>> tm = new TreeMap<>();
         List<List<Integer>> ans = new ArrayList<>();
-        helper(root,tm, 0 ,0);
+        TreeMap<Integer,TreeMap<Integer,PriorityQueue<Integer>>> tm= new TreeMap<>();
+        helper(0,0,root, tm);
         for(Integer outer: tm.keySet())
         {
             List<Integer> arr = new ArrayList<>();
@@ -35,22 +35,23 @@ class Solution {
         }
         return ans;
     }
-    public void helper( TreeNode root,  TreeMap<Integer,TreeMap<Integer,PriorityQueue<Integer>>>tm ,int row ,int col)
+    private void helper(int r, int c, TreeNode root,TreeMap<Integer,TreeMap<Integer,PriorityQueue<Integer>>> tm)
     {
+
         if(root==null) return;
-        if(!tm.containsKey(col))
+        if(!tm.containsKey(c))
         {
-            tm.put(col, new TreeMap<Integer,PriorityQueue<Integer>>());
+            tm.put(c, new TreeMap<Integer,PriorityQueue<Integer>>() );
         }
-        if(!tm.get(col).containsKey(row))
+        if(!tm.get(c).containsKey(r))
         {
             PriorityQueue<Integer> pq = new PriorityQueue<>();
-            tm.get(col).put(row,pq);
+            tm.get(c).put(r,pq);
         }
-        PriorityQueue<Integer> pq = tm.get(col).get(row);
+        PriorityQueue<Integer> pq = tm.get(c).get(r);
         pq.add(root.val);
-        
-        helper(root.left , tm , row+1, col -1);
-        helper(root.right , tm , row+1, col +1);
+        helper(r+1,c-1,root.left,tm);
+        helper(r+1,c+1,root.right,tm);
+
     }
 }
