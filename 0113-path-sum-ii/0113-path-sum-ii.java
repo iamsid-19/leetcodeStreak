@@ -16,28 +16,26 @@
 class Solution {
     List<List<Integer>> ans = new ArrayList<>();
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
-         List<List<Integer>> ans = new ArrayList<>();
-         List<Integer> list = new ArrayList<>();
-         helper(root,targetSum,ans,list);
-         return ans;
+        List<Integer> list = new ArrayList<>();
+        fun(root,targetSum,list);
+        return ans;
     }
-    public void helper(TreeNode root, int target, List<List<Integer>> ans, List<Integer>list )
+    private void fun(TreeNode root, int t, List<Integer> list)
     {
-        if(root==null)
-        {
-            return;
-        }
+        if(root==null) return;
         list.add(root.val);
-        if(root.left==null && root.right==null)
+        if(root.left ==null && root.right==null)
         {
-            if(root.val==target)
-            {
-                ans.add(new ArrayList<>(list));
-            }
+          if(t==root.val)
+          {
+           
+            ans.add(new ArrayList<>(list));
+          }
+         
         }
-        int rem =target-root.val;
-        helper(root.left,rem,ans,list);
-        helper(root.right,rem,ans,list);
+        
+        fun(root.left,t-root.val,list);
+        fun(root.right,t-root.val,list);
         list.remove(list.size()-1);
     }
-}  
+}
