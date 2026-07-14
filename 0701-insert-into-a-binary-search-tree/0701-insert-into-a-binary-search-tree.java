@@ -27,7 +27,7 @@ class Solution {
             else
             cur=cur.left;
         }
-        if(cur==null && prev.val>val)
+        if( prev.val>val)
         prev.left=t;
         else
         prev.right=t;
