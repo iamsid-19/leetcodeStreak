@@ -14,35 +14,32 @@
  * }
  */
 class Solution {
-    public TreeNode deleteNode(TreeNode root, int val) {
+    public TreeNode deleteNode(TreeNode root, int key) {
         if(root==null)
+        return null;
+        if(root.val<key)
+        root.right=deleteNode(root.right,key);
+        else if(root.val>key)
+        root.left=deleteNode(root.left,key);
+        else
         {
-            return null;
-        }
-        else if(root.val<val)
-        {
-            root.right = deleteNode(root.right, val);
-        }
-        else if(root.val>val)
-        {
-            root.left=deleteNode( root.left,val);
-        }
-        else{
             if(root.left==null) return root.right;
-            else if(root.right ==null) return root.left;
+            else if(root.right==null) return root.left;
             else{
-                TreeNode suc = getSuc(root);
+                TreeNode suc=func(root);
                 root.val=suc.val;
-                root.right= deleteNode( root.right,suc.val);
+                root.right=deleteNode(root.right,suc.val);
             }
+
         }
         return root;
     }
-    public TreeNode getSuc(TreeNode root){
-        TreeNode cur =root.right;
+    public TreeNode func(TreeNode root)
+    {
+        TreeNode cur = root.right;
         while(cur!=null && cur.left!=null)
         {
-            cur= cur.left;
+            cur=cur.left;
         }
         return cur;
     }
